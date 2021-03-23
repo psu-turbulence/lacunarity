@@ -14,7 +14,7 @@ function [r_a, h] = spatial_index(L, R, tol)
 % Ryan Scott
 % 03/23/2021
 
-d_L = abs(gradient(L3D3, R3D3));
+d_L = abs(gradient(L, R));
 idx = find(d_L < tol, 1);
 if (isempty(idx))
     r_a = R(end);
@@ -26,4 +26,3 @@ end
 h = 1 - (2*l_h)/(1 + r_a);
 
 end
-
