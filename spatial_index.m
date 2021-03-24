@@ -4,7 +4,7 @@ function [r_a, h] = spatial_index(L, R, tol)
 % INPUTS:
 % L             - Lacunarity values from lacunarity.m
 % R 			- Box values from lacunarity.m
-% tol           - Gradient tolerance for finding dL/dR=0
+% tol           - Gradient tolerance for finding L=1 and dL/dR=0
 %
 % OUTPUTS:
 % r_a 			- Cutoff point
@@ -15,7 +15,7 @@ function [r_a, h] = spatial_index(L, R, tol)
 % 03/23/2021
 
 d_L = abs(gradient(L, R));
-idx = find(d_L < tol, 1);
+idx = find(L < 1 + tol & d_L < tol, 1);
 if (isempty(idx))
     r_a = R(end);
     l_h = (1/length(R))*sum(L.*R);
