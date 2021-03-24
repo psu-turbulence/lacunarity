@@ -1,2 +1,2 @@
 # lacunarity
-Lacunarity based method for quantifying spatial heterogeneity &lt;paper doi>
+MATLAB imlementation of lacunarity based method for quantifying spatial heterogeneity <paper doi>
