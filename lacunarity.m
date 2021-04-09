@@ -1,4 +1,4 @@
-function [L, Ln, R, Rn, Z, Zn] = SuperLac(data, n_p)
+function [L, Ln, R, Rn, Z, Zn] = lacunarity(data, n_p)
 % 1, 2, 3 dimensional lacunarity calculation
 %
 % INPUTS:
