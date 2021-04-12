@@ -20,7 +20,7 @@ if (isempty(idx))
     r_a = R(end);
     l_h = (1/length(R))*sum(L.*R);
 else
-    r_a = R3D3(idx);
+    r_a = R(idx);
     l_h = (1/idx)*sum(L(1:idx).*R(1:idx));
 end
 h = 1 - (2*l_h)/(1 + r_a);
