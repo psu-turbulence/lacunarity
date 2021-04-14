@@ -82,11 +82,9 @@ if (length(s) == 3)
         end
         
         % Compute statistics
-        z1 = mean(A(:)/r, 'omitnan');
-        z2 = var(A(:)/r, 'omitnan');
-%         z3 = skewness(A(:)/r, 'omitnan');
-%         z4 = kurtosis(A(:)/r, 'omitnan');
-        z3 = skewness(A(:)/r);      %'omitnan' inappropriate For tested version of MATLAB 2020a
+        z1 = mean(A(:)/r);
+        z2 = var(A(:)/r);
+        z3 = skewness(A(:)/r);
         z4 = kurtosis(A(:)/r);
         Z(b, :) = [z1, z2, z3, z4];
         L(b) = 1 + z2/(z1^2);
@@ -123,10 +121,10 @@ elseif (length(s) == 2 && ~any(s == 1))
         end
         
         % Compute statistics
-        z1 = mean(A(:)/r, 'omitnan');
-        z2 = var(A(:)/r, 'omitnan');
-        z3 = skewness(A(:)/r, 'omitnan');
-        z4 = kurtosis(A(:)/r, 'omitnan');
+        z1 = mean(A(:)/r);
+        z2 = var(A(:)/r);
+        z3 = skewness(A(:)/r);
+        z4 = kurtosis(A(:)/r);
         Z(b, :) = [z1, z2, z3, z4];
         L(b) = 1 + z2/(z1^2);
 
@@ -147,10 +145,8 @@ elseif (length(s) == 2 && any(s == 1))
         A((end - r + 2):end, :) = [];
         
         % Compute statistics
-        z1 = mean(A(:)/r, 'omitnan');
-        z2 = var(A(:)/r, 'omitnan');
-%         z3 = skewness(A(:)/r, 'omitnan');
-%         z4 = kurtosis(A(:)/r, 'omitnan');
+        z1 = mean(A(:)/r);
+        z2 = var(A(:)/r);
         z3 = skewness(A(:)/r);
         z4 = kurtosis(A(:)/r);
         Z(b, :) = [z1, z2, z3, z4];
