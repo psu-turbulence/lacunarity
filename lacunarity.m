@@ -3,9 +3,7 @@ function [L, Ln, R, Rn, Z, Zn] = lacunarity(data, n_p)
 %
 % INPUTS:
 % data          - Input data, must be 2D matrix of element height
-%
-% Optional:
-% n_p 			- Number of box sizes, must be lower than data size (default: n_p = max dimension of data)
+% n_p 			- Number of box sizes, must be lower than data size
 %
 % OUTPUTS:
 % L 			- Vector of lacunarity values
@@ -18,23 +16,13 @@ function [L, Ln, R, Rn, Z, Zn] = lacunarity(data, n_p)
 % CREATED:
 % Ryan Scott
 % 03/23/2021
-%
-%EDITS:
-% Sarah Smith 04/09/2021: 
-%   - added 'nargin' check to account for full data rather than requre n_p box size designation
-%%
 
 s = size(data);
-s_max = max(s) - 1;
-
-if nargin<2
-    n_p = s_max;
-end
 if (n_p > max(s))
     fprintf (2, 'Number of points must be less than data size.\n');
     return
 end
-
+s_max = max(s) - 1;
 R = unique(round(linspace(1, s_max, n_p)));
 L = 1:length(R);
 Z = NaN(length(R), 4);
@@ -82,10 +70,10 @@ if (length(s) == 3)
         end
         
         % Compute statistics
-        z1 = mean(A(:)/r);
-        z2 = var(A(:)/r);
-        z3 = skewness(A(:)/r);
-        z4 = kurtosis(A(:)/r);
+        z1 = mean(A(:)/r, 'omitnan');
+        z2 = var(A(:)/r, 'omitnan');
+        z3 = skewness(A(:)/r, 'omitnan');
+        z4 = kurtosis(A(:)/r, 'omitnan');
         Z(b, :) = [z1, z2, z3, z4];
         L(b) = 1 + z2/(z1^2);
 
@@ -121,10 +109,10 @@ elseif (length(s) == 2 && ~any(s == 1))
         end
         
         % Compute statistics
-        z1 = mean(A(:)/r);
-        z2 = var(A(:)/r);
-        z3 = skewness(A(:)/r);
-        z4 = kurtosis(A(:)/r);
+        z1 = mean(A(:)/r, 'omitnan');
+        z2 = var(A(:)/r, 'omitnan');
+        z3 = skewness(A(:)/r, 'omitnan');
+        z4 = kurtosis(A(:)/r, 'omitnan');
         Z(b, :) = [z1, z2, z3, z4];
         L(b) = 1 + z2/(z1^2);
 
@@ -145,10 +133,10 @@ elseif (length(s) == 2 && any(s == 1))
         A((end - r + 2):end, :) = [];
         
         % Compute statistics
-        z1 = mean(A(:)/r);
-        z2 = var(A(:)/r);
-        z3 = skewness(A(:)/r);
-        z4 = kurtosis(A(:)/r);
+        z1 = mean(A(:)/r, 'omitnan');
+        z2 = var(A(:)/r, 'omitnan');
+        z3 = skewness(A(:)/r, 'omitnan');
+        z4 = kurtosis(A(:)/r, 'omitnan');
         Z(b, :) = [z1, z2, z3, z4];
         L(b) = 1 + z2/(z1^2);
 
