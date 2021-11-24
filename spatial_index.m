@@ -1,10 +1,10 @@
-function [r_a, h] = spatial_index(L, R, tol)
+function [r_a, h] = spatial_index(R, L, tol)
 % Cutoff point and heterogeneity index assignment
 %
 % INPUTS:
-% L             - Lacunarity values from lacunarity.m
 % R 			- Box values from lacunarity.m
-% tol           - Gradient tolerance for finding L=1 and dL/dR=0
+% L             - Lacunarity values from lacunarity.m
+% tol           - Tolerance for L = 1
 %
 % OUTPUTS:
 % r_a 			- Cutoff point
@@ -14,15 +14,19 @@ function [r_a, h] = spatial_index(L, R, tol)
 % Ryan Scott
 % 03/23/2021
 
-d_L = abs(gradient(L, R));
-idx = find(L < 1 + tol & d_L < tol, 1);
-if (isempty(idx))
+d_L = gradient(L, R);
+idx = squeeze(find(d_L > 0 & L/L(1) < 1 + tol, 1) - 1);
+L = L/L(1);
+if isempty(idx)
     r_a = R(end);
-    l_h = (1/length(R))*sum(L.*R);
+    l_w = (1/length(R))*sum(L.*R);
+elseif (idx < 1)
+    r_a = R(end);
+    l_w = (1/length(R))*sum(L.*R);
 else
     r_a = R(idx);
-    l_h = (1/idx)*sum(L(1:idx).*R(1:idx));
+    l_w = (1/idx)*sum(L(1:idx).*R(1:idx));
 end
-h = 1 - (2*l_h)/(1 + r_a);
+h = 1 - (2*l_w)/(1 + r_a);
 
 end
