@@ -2,7 +2,7 @@ function [L, Ln, R, Rn, Z, Zn] = lacunarity(data, n_p)
 % 1, 2, 3 dimensional lacunarity calculation
 %
 % INPUTS:
-% data          - Input data, must be 2D matrix of element height
+% data          - Input data
 % n_p 			- Number of box sizes, must be lower than data size
 %
 % OUTPUTS:
