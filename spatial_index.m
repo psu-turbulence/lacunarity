@@ -15,7 +15,7 @@ function [r_a, h] = spatial_index(R, L, tol)
 % 03/23/2021
 
 d_L = gradient(L, R);
-idx = squeeze(find(d_L > 0 & L/L(1) < 1 + tol, 1) - 1);
+idx = squeeze(find(d_L > 0 & L < 1 + tol, 1) - 1);
 L = L/L(1);
 if isempty(idx)
     r_a = R(end);
